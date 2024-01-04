@@ -5,11 +5,50 @@ import App from './App';
 // import Card from './components/card';
 import reportWebVitals from './reportWebVitals';
 
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import User from './components/User/User';
+import Github, { githubInfoLoader }  from './components/Github/Github';
+const router= createBrowserRouter(
+  [
+{
+  path:'',
+  element:<App/>,
+  children:[{
+    path:'',
+    element:<Home/>,
+  },
+  {
+    path:'about',
+    element:<About/>,
+  },
+  {
+    path:'User/:id',
+    element:<User/>,
+  },
+  {
+    path:'Github',
+    loader:githubInfoLoader,
+    element:<Github/>,
+  },
+]
+}
+  ]
+)
+
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    {/* <Card/> */}
+    <RouterProvider router={router}/>
+
+ 
   </React.StrictMode>
 );
 
